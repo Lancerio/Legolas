@@ -28,24 +28,41 @@ Plugin 'nathanaelkane/vim-indent-guides'
 " 插件:虚线缩进
 Bundle 'Yggdroot/indentLine'
 " 插件:自动补全
-"Bundle 'Valloric/YouCompleteMe'
+Bundle 'Valloric/YouCompleteMe'
 " 插件:lua -- vim-misc
 Plugin 'xolox/vim-misc'
 " 插件:lua -- xolox/vim-lua-ftplugin
 Plugin 'xolox/vim-lua-ftplugin'
 " 插件:supertab
 Plugin 'ervandew/supertab'
-" 插件:Clang自动补全
-Plugin 'clang-complete'
+" 插件:ctags
+Plugin 'ctags.vim'
 " 插件:语法提示
 Bundle 'scrooloose/syntastic'
+" 插件:winmanager
 Plugin 'winmanager' 
-" taglist depend ctag
-" Plugin 'taglist.vim' 
+" 插件:taglist depend ctag
+Plugin 'taglist.vim' 
+" 插件:cscope
+Plugin 'cscope.vim' 
+" 插件:c/h file convert
+Plugin 'a.vim'  
+" 插件:BufExplorer
+Plugin 'bufexplorer.zip'
+
+" c/h file convert touch F12
+nnoremap <silent> <F12> :A<cr>
+
+" superTab config that typing <Tab> is <C-X><C-O>
+let g:SuperTabRetainCompletionType=2
+let g:SuperTabDefaultCompletionType="<C-X><C-O>"
+
+" netrw setting -- netrw is default plugin in vim7.0
+let g:netrw_winsize=30
 
 " Taglist配置
-"let Tlist_Show_One_File=1
-"let Tlist_Exit_OnlyWindow=1
+let Tlist_Show_One_File=1
+let Tlist_Exit_OnlyWindow=1
 
 " Taglist与Winmanager配合配置
 let g:winManagerWindowLayout = "BufExplorer,FileExplorer|TagList"
@@ -53,7 +70,7 @@ let g:winManagerWidth = 30
 let g:defaultExplorer = 0 
 nmap <C-W><C-F> :FirstExplorerWindow<cr> 
 nmap <C-W><C-B> :BottomExplorerWindow<cr> 
-nmap <silent> <F8> :WMToggle<cr> 
+nmap <silent> <F8> :WMToggle<cr>
 " 配置进入vim时自动打开winmanager
 "let g:AutoOpenWinManager = 1
 
@@ -102,27 +119,31 @@ let g:airline_symbols.whitespace = '|'
 
 " regular config
 " 语法高亮
-syntax on
+" syntax enable 
+syntax on "覆盖当前语法高亮的更改
 
 " 搜索和匹配
-set showmatch			" 高亮匹配的括号
-set matchtime=5 		" 匹配括号高亮的时间（单位:0.1senconds）
-set hlsearch			" 高亮查找
-set formatoptions=tcrqn 	" 自动格式化
-set autoindent 			" 继承缩进方式
-set smartindent 		" C程序自动缩进
-set cindent 			" C样式的缩进
-set nobackup			" 关闭备份
-set nowritebackup		" 关闭写入备份
-set noswapfile			" 关闭交换文件
-set showcmd			" 显示输入命令
-set laststatus=2		" 总是显示状态栏
-set textwidth=80		" 内容宽度
-set cc=80			" 显示80列的竖线
-set clipboard+=unnamed 		" 共享剪切板
+set showmatch	        		" 高亮匹配的括号
+set matchtime=5 	        	" 匹配括号高亮的时间（单位:0.1senconds）
+set hlsearch		        	" 高亮查找
+set formatoptions=tcrqn     	" 自动格式化
+set autoindent 		        	" 继承缩进方式
+"set smartindent 	        	" 智能对齐
+set cindent                     " 使用 C/C++ 语言的自动缩进方式
+set tabstop=4                   " 设置制表符(tab键)的宽度
+set softtabstop=4               " 设置软制表符的宽度    
+set shiftwidth=4                " (自动) 缩进使用的4个空格
+set nobackup		        	" 关闭备份
+set nowritebackup	        	" 关闭写入备份
+set noswapfile		        	" 关闭交换文件
+set showcmd		            	" 显示输入命令
+set showmode                    " 命令行显示vim当前模式
+set laststatus=2	         	" 总是显示状态栏
+set textwidth=80	         	" 内容宽度
+set cc=80		             	" 显示80列的竖线
+set clipboard+=unnamed 		    " 共享剪切板
 
 " 系统配色
-syntax enable
 colorscheme solarized 
 let g:colors_name='solarized'
 let g:solarized_termcolors=256
@@ -154,6 +175,10 @@ hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=white guibg=darkred guifg=whit
 
 " Syntastic
 let g:syntastic_always_populate_loc_list = 1
+" 打开文件时 Syntastic 插件自动高亮显示错误
+let g:syntastic_check_on_open = 1
+" 打开文件时让光标跳转到检测到的第一个问题处
+let g:syntastic_auto_jump = 1
 
 " 彩虹括号配置
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
