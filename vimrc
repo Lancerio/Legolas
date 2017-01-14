@@ -29,6 +29,8 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Bundle 'Yggdroot/indentLine'
 " 插件:自动补全
 Bundle 'Valloric/YouCompleteMe'
+" 插件:YouCompleteMe语义补全的服务器
+"Bundle 'Valloric/ycmd'
 " 插件:lua -- vim-misc
 Plugin 'xolox/vim-misc'
 " 插件:lua -- xolox/vim-lua-ftplugin
@@ -50,21 +52,24 @@ Plugin 'a.vim'
 " 插件:BufExplorer
 Plugin 'bufexplorer.zip'
 
+" Plugin A for converting c/h file Setting ------------------------------------
 " c/h file convert touch F12
 nnoremap <silent> <F12> :A<cr>
 
+" SuperTab Setting ------------------------------------------------------------
 " superTab config that typing <Tab> is <C-X><C-O>
 let g:SuperTabRetainCompletionType=2
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
 
-" netrw setting -- netrw is default plugin in vim7.0
+" Netrw Setting --------------------------------------------------------------- 
+" netrw is default plugin in vim7.0
 let g:netrw_winsize=30
 
-" Taglist配置
+" Taglist Setting -------------------------------------------------------------
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
 
-" Taglist与Winmanager配合配置
+" Taglist work in with Winmanager Setting -------------------------------------
 let g:winManagerWindowLayout = "BufExplorer,FileExplorer|TagList"
 let g:winManagerWidth = 30
 let g:defaultExplorer = 0 
@@ -74,7 +79,7 @@ nmap <silent> <F8> :WMToggle<cr>
 " 配置进入vim时自动打开winmanager
 "let g:AutoOpenWinManager = 1
 
-" vim-airline 配置
+" Vim-airline Setting ---------------------------------------------------------
 let g:airline_theme='luna'
 set guifont=Liberation\ Mono\ for\ Powerline\ 10
 " powerline字体补丁配置
@@ -107,7 +112,8 @@ let g:airline_symbols.whitespace = '|'
 "let g:airline_symbols.readonly = ''
 "let g:airline_symbols.linenr = ''
 
-" 缩进配置
+
+" Indent Setting --------------------------------------------------------------
 " indent_guides配置(填充缩进)
 "let g:indent_guides_enable_on_vim_startup = 1
 "let g:indent_guides_auto_colors = 1
@@ -117,11 +123,12 @@ let g:airline_symbols.whitespace = '|'
 " indentLine配置(虚线缩进)
 " map <leader>lt :IndentLinesToggle<CR>
 
-" regular config
+" Regular Setting -------------------------------------------------------------
 " 语法高亮
 " syntax enable 
 syntax on "覆盖当前语法高亮的更改
 
+" General Setting -------------------------------------------------------------
 " 搜索和匹配
 set showmatch	        		" 高亮匹配的括号
 set matchtime=5 	        	" 匹配括号高亮的时间（单位:0.1senconds）
@@ -143,6 +150,7 @@ set textwidth=80	         	" 内容宽度
 set cc=80		             	" 显示80列的竖线
 set clipboard+=unnamed 		    " 共享剪切板
 
+" Theme Setting ---------------------------------------------------------------
 " 系统配色
 colorscheme solarized 
 let g:colors_name='solarized'
@@ -154,32 +162,53 @@ let g:solarized_visibility='normal'
 "colorscheme molokai 
 "let g:molokai_original=1
 
+" Cursorline Setting ----------------------------------------------------------
 " cursorline配色
 set cursorline
 hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=white guibg=darkred guifg=white
 
-" YouComplete
-"nmap <F4> :YcmDiags<CR>
-"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-"let g:ycm_error_symbol = '>>'
-"let g:ycm_warning_symbol = '>*'
-"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-"let g:ycm_collect_identifiers_from_tags_files=1	" 开启YCM基于标签引擎
-"let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
-"let g:ycm_cache_omnifunc=0 " 禁止缓存匹配项
-"let g:ycm_seed_identifiers_with_syntax=1 " 语法关键字补全
-"let g:ycm_confirm_extra_conf = 0 " 禁止手动确认导入配置
-" 自动关闭补全窗口
-"set completeopt=longest,menu                                                                                                                                                                                      
-"autocmd InsertLeave * if pumvisible() == 0|pclose|endif   
+" YouComplete Setting ---------------------------------------------------------
+nmap <F4> :YcmDiags<CR>
+" 配置补全菜单行为
+set completeopt=longest,menu                                                                                                                                                                                      
+" 离开插入模式后自动关闭预览窗口
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif   
+" 跳转到定义
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" 上下左右键的行为触发显示其他信息
+inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+" 回车即选中当前项
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"	
 
-" Syntastic
+let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+"let g:ycm_key_list_select_completion=['<c-n>']
+let g:ycm_key_list_select_completion = ['<Down>']
+"let g:ycm_key_list_previous_completion=['<c-p>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+
+let g:ycm_error_symbol = '>>'                                " error symbol
+let g:ycm_warning_symbol = '>*'                              " warning symbol
+"let g:ycm_confirm_extra_conf=0                              " 关闭加载.ycm_extra_conf.py提示
+let g:ycm_collect_identifiers_from_tags_files=1              " 开启YCM基于标签引擎
+let g:ycm_min_num_of_chars_for_completion=2                  " 从第2个键入字符就开始罗列匹配项
+let g:ycm_cache_omnifunc=0                                   " 禁止缓存匹配项,每次都重新生成匹配项
+let g:ycm_seed_identifiers_with_syntax=1                     " 语法关键字补全
+let g:ycm_confirm_extra_conf = 0                             " 禁止手动确认导入配置
+"let g:ycm_complete_in_comments = 1                          " 允许在注释输入中补全
+let g:ycm_complete_in_strings = 1                            " 允许在字符串输入中补全
+"let g:ycm_collect_identifiers_from_comments_and_strings = 0 " 注释和字符串中的文字也会被收入补全
+
+" Syntastic Setting -----------------------------------------------------------
 let g:syntastic_always_populate_loc_list = 1
 " 打开文件时 Syntastic 插件自动高亮显示错误
 let g:syntastic_check_on_open = 1
 " 打开文件时让光标跳转到检测到的第一个问题处
 let g:syntastic_auto_jump = 1
 
+" Rainbow Setting -------------------------------------------------------------
 " 彩虹括号配置
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {
