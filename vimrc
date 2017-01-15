@@ -58,16 +58,16 @@ nnoremap <silent> <F12> :A<cr>
 
 " SuperTab Setting ------------------------------------------------------------
 " superTab config that typing <Tab> is <C-X><C-O>
-let g:SuperTabRetainCompletionType=2
-let g:SuperTabDefaultCompletionType="<C-X><C-O>"
+let g:SuperTabRetainCompletionType = 2
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
 " Netrw Setting --------------------------------------------------------------- 
 " netrw is default plugin in vim7.0
-let g:netrw_winsize=30
+let g:netrw_winsize = 30
 
 " Taglist Setting -------------------------------------------------------------
-let Tlist_Show_One_File=1
-let Tlist_Exit_OnlyWindow=1
+let Tlist_Show_One_File = 1
+let Tlist_Exit_OnlyWindow = 1
 
 " Taglist work in with Winmanager Setting -------------------------------------
 let g:winManagerWindowLayout = "BufExplorer,FileExplorer|TagList"
@@ -80,7 +80,7 @@ nmap <silent> <F8> :WMToggle<cr>
 "let g:AutoOpenWinManager = 1
 
 " Vim-airline Setting ---------------------------------------------------------
-let g:airline_theme='luna'
+let g:airline_theme = 'luna'
 set guifont=Liberation\ Mono\ for\ Powerline\ 10
 " powerline字体补丁配置
 let g:airline_powerline_fonts = 1
@@ -153,11 +153,11 @@ set clipboard+=unnamed 		    " 共享剪切板
 " Theme Setting ---------------------------------------------------------------
 " 系统配色
 colorscheme solarized 
-let g:colors_name='solarized'
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-let g:solarized_contrast='normal'
-let g:solarized_visibility='normal'
+let g:colors_name = 'solarized'
+let g:solarized_termcolors = 256
+let g:solarized_termtrans = 1
+let g:solarized_contrast = 'normal'
+let g:solarized_visibility = 'normal'
 
 "colorscheme molokai 
 "let g:molokai_original=1
@@ -168,13 +168,25 @@ set cursorline
 hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=white guibg=darkred guifg=white
 
 " YouComplete Setting ---------------------------------------------------------
-nmap <F4> :YcmDiags<CR>
 " 配置补全菜单行为
 set completeopt=longest,menu                                                                                                                                                                                      
 " 离开插入模式后自动关闭预览窗口
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif   
-" 跳转到定义
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" 打开诊断信息
+nnoremap <silent> <leader>yd :YcmDiags<CR>
+" 获取变量类型
+nnoremap <silent> <leader>yt :YcmCompleter GetType<CR>
+" 跳转定义或声明
+nnoremap <silent> <leader>ye :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" 跳转包含文件
+nnoremap <silent> <leader>yi :YcmCompleter GoToInclude<CR>
+" force recomile with syntastic
+nnoremap <leader>fc :YcmForceCompileAndDiagnostics<CR>
+" open locationlist
+nnoremap <leader>lo :lopen<CR>
+" close locationlist
+nnoremap <leader>lc :lclose<CR>
+
 " 上下左右键的行为触发显示其他信息
 inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
@@ -183,23 +195,27 @@ inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 " 回车即选中当前项
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"	
 
-let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 "let g:ycm_key_list_select_completion=['<c-n>']
 let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion=['<c-p>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 
-let g:ycm_error_symbol = '>>'                                " error symbol
-let g:ycm_warning_symbol = '>*'                              " warning symbol
-"let g:ycm_confirm_extra_conf=0                              " 关闭加载.ycm_extra_conf.py提示
-let g:ycm_collect_identifiers_from_tags_files=1              " 开启YCM基于标签引擎
-let g:ycm_min_num_of_chars_for_completion=2                  " 从第2个键入字符就开始罗列匹配项
-let g:ycm_cache_omnifunc=0                                   " 禁止缓存匹配项,每次都重新生成匹配项
-let g:ycm_seed_identifiers_with_syntax=1                     " 语法关键字补全
-let g:ycm_confirm_extra_conf = 0                             " 禁止手动确认导入配置
-"let g:ycm_complete_in_comments = 1                          " 允许在注释输入中补全
-let g:ycm_complete_in_strings = 1                            " 允许在字符串输入中补全
-"let g:ycm_collect_identifiers_from_comments_and_strings = 0 " 注释和字符串中的文字也会被收入补全
+let g:ycm_error_symbol = '>>'                                  " error symbol
+let g:ycm_warning_symbol = '>*'                                " warning symbol
+let g:ycm_collect_identifiers_from_tags_files = 1              " 开启YCM基于标签引擎
+let g:ycm_min_num_of_chars_for_completion = 2                  " 从第2个键入字符就开始罗列匹配项
+let g:ycm_cache_omnifunc = 0                                   " 禁止缓存匹配项,每次都重新生成匹配项
+let g:ycm_seed_identifiers_with_syntax = 1                     " 语法关键字补全
+let g:ycm_confirm_extra_conf = 0                               " 禁止手动确认导入配置
+let g:ycm_complete_in_comments = 0                             " 在注释输入中补全:0关闭,1开启
+let g:ycm_complete_in_strings = 0                              " 在字符串输入中补全:0关闭,1开启
+let g:ycm_collect_identifiers_from_comments_and_strings = 0    " 注释和字符串中的文字也会被收入补全
+let g:ycm_enable_diagnostic_signs = 1                          " 诊断提示符:0关闭,1开启
+let g:ycm_enable_diagnostic_highlighting = 1                   " 诊断高亮:0关闭,1开启
+let g:ycm_key_invoke_completion = '<C-Tab>'                    " 跨文件补全
+let g:ycm_confirm_extra_conf = 1                               " 加载.ycm_extra_conf.py提示:0关闭,1打开
+let g:ycm_show_diagnostics_ui = 1                              " 诊断ui:0关闭,1打开
 
 " Syntastic Setting -----------------------------------------------------------
 let g:syntastic_always_populate_loc_list = 1
