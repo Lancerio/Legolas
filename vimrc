@@ -201,8 +201,8 @@ let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion=['<c-p>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 
-let g:ycm_error_symbol = '>>'                                  " error symbol
-let g:ycm_warning_symbol = '>*'                                " warning symbol
+let g:ycm_error_symbol = '✗'                                   " error symbol
+let g:ycm_warning_symbol = '⚠'                                 " warning symbol
 let g:ycm_collect_identifiers_from_tags_files = 1              " 开启YCM基于标签引擎
 let g:ycm_min_num_of_chars_for_completion = 2                  " 从第2个键入字符就开始罗列匹配项
 let g:ycm_cache_omnifunc = 0                                   " 禁止缓存匹配项,每次都重新生成匹配项
@@ -223,6 +223,18 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 1
 " 打开文件时让光标跳转到检测到的第一个问题处
 let g:syntastic_auto_jump = 1
+" set error signs
+let g:syntastic_error_symbol = '✗' 
+" set warning signs
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_enable_highlighting = 0
+let g:syntastic_cpp_include_dirs = ['/usr/include/']
+let g:syntastic_cpp_remove_include_errors = 1
+let g:syntastic_cpp_check_header = 1
+let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
+" whether to show balloons
+let g:syntastic_enable_balloons = 1 
+"let g:syntastic_cpp_compiler = 'clang++'
 
 " Rainbow Setting -------------------------------------------------------------
 " 彩虹括号配置
