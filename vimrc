@@ -43,8 +43,8 @@ Plugin 'ctags.vim'
 Bundle 'scrooloose/syntastic'
 " 插件:winmanager
 Plugin 'winmanager' 
-" 插件:taglist depend ctag
-Plugin 'taglist.vim' 
+" 插件:tagbar depend ctag
+Plugin 'Tagbar' 
 " 插件:cscope
 Plugin 'cscope.vim' 
 " 插件:c/h file convert
@@ -56,6 +56,15 @@ Plugin 'bufexplorer.zip'
 " c/h file convert touch F12
 nnoremap <silent> <F12> :A<cr>
 
+" Tagbar Setting --------------------------------------------------------------
+nmap <Leader>tb :TagbarToggle<CR>
+" ctags程序的路径
+let g:tagbar_ctags_bin='ctags'           
+" 窗口宽度的设置
+let g:tagbar_width=30                    
+" c语言程序,tagbar自动开启
+autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
+
 " SuperTab Setting ------------------------------------------------------------
 " superTab config that typing <Tab> is <C-X><C-O>
 let g:SuperTabRetainCompletionType = 2
@@ -65,17 +74,13 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 " netrw is default plugin in vim7.0
 let g:netrw_winsize = 30
 
-" Taglist Setting -------------------------------------------------------------
-let Tlist_Show_One_File = 1
-let Tlist_Exit_OnlyWindow = 1
-
-" Taglist work in with Winmanager Setting -------------------------------------
-let g:winManagerWindowLayout = "BufExplorer,FileExplorer|TagList"
+" Tagbar work in with Winmanager Setting -------------------------------------
+let g:winManagerWindowLayout = "BufExplorer,FileExplorer|Tagbar"
 let g:winManagerWidth = 30
 let g:defaultExplorer = 0 
 nmap <C-W><C-F> :FirstExplorerWindow<cr> 
 nmap <C-W><C-B> :BottomExplorerWindow<cr> 
-nmap <silent> <F8> :WMToggle<cr>
+nmap <silent> wm :WMToggle<cr>
 " 配置进入vim时自动打开winmanager
 "let g:AutoOpenWinManager = 1
 
@@ -218,7 +223,13 @@ let g:ycm_confirm_extra_conf = 1                               " 加载.ycm_extr
 let g:ycm_show_diagnostics_ui = 1                              " 诊断ui:0关闭,1打开
 
 " Syntastic Setting -----------------------------------------------------------
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_wq = 0
 " 打开文件时 Syntastic 插件自动高亮显示错误
 let g:syntastic_check_on_open = 1
 " 打开文件时让光标跳转到检测到的第一个问题处
