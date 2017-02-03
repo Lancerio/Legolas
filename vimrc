@@ -206,6 +206,7 @@ let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion=['<c-p>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 
+let g:ycm_register_as_syntastic_checker = 1                    " 使用syntastic检测语法
 let g:ycm_error_symbol = '✗'                                   " error symbol
 let g:ycm_warning_symbol = '⚠'                                 " warning symbol
 let g:ycm_collect_identifiers_from_tags_files = 1              " 开启YCM基于标签引擎
@@ -239,13 +240,16 @@ let g:syntastic_error_symbol = '✗'
 " set warning signs
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_enable_highlighting = 0
-let g:syntastic_cpp_include_dirs = ['/usr/include/']
+let g:syntastic_cpp_include_dirs = ['/usr/include/',
+			\'/usr/include/c++/6.3.1']
 let g:syntastic_cpp_remove_include_errors = 1
+let g:syntastic_cpp_auto_refresh_includes = 1
 let g:syntastic_cpp_check_header = 1
-let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
+"let g:syntastic_cpp_compiler = 'clang++'
+"let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = '-std=c++11 stdlib=libstdc++ -Wall -Wextra'
 " whether to show balloons
 let g:syntastic_enable_balloons = 1 
-"let g:syntastic_cpp_compiler = 'clang++'
 
 " Rainbow Setting -------------------------------------------------------------
 " 彩虹括号配置
