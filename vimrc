@@ -185,7 +185,7 @@ nnoremap <silent> <leader>yt :YcmCompleter GetType<CR>
 nnoremap <silent> <leader>ye :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " 跳转包含文件
 nnoremap <silent> <leader>yi :YcmCompleter GoToInclude<CR>
-" force recomile with syntastic
+" force recompile with syntastic
 nnoremap <leader>fc :YcmForceCompileAndDiagnostics<CR>
 " open locationlist
 nnoremap <leader>lo :lopen<CR>
@@ -240,12 +240,17 @@ let g:syntastic_error_symbol = '✗'
 " set warning signs
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_enable_highlighting = 0
-let g:syntastic_cpp_include_dirs = ['/usr/include/',
-			\'/usr/include/c++/6.3.1']
+
+" Attention below config sequence, because we can find stdlib.h in /usr/include , but
+" that stdlib.h is not expected by gcc-6, and an fatal error comes.
+" So, we need set the cpp's 'include path' in front of the general 'include path'
+let g:syntastic_cpp_include_dirs = ['/usr/include/c++/6.3.1',
+			\'/usr/include/',
+			\'/usr/local/include']
 let g:syntastic_cpp_remove_include_errors = 1
 let g:syntastic_cpp_auto_refresh_includes = 1
 let g:syntastic_cpp_check_header = 1
-"let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler = 'clang++'
 "let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 stdlib=libstdc++ -Wall -Wextra'
 " whether to show balloons
