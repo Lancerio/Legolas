@@ -183,6 +183,10 @@ nnoremap <silent> <leader>yd :YcmDiags<CR>
 nnoremap <silent> <leader>yt :YcmCompleter GetType<CR>
 " 跳转定义或声明
 nnoremap <silent> <leader>ye :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" 跳转声明
+nnoremap <silent> <leader>yq :YcmCompleter GoToDeclaration<CR>
+" 跳转定义
+nnoremap <silent> <leader>yw :YcmCompleter GoToDefinition<CR>
 " 跳转包含文件
 nnoremap <silent> <leader>yi :YcmCompleter GoToInclude<CR>
 " force recompile with syntastic
@@ -206,6 +210,7 @@ let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion=['<c-p>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 
+"let g:ycm_goto_buffer_command = 'horizontal-split'            " 分屏打开
 let g:ycm_register_as_syntastic_checker = 1                    " 使用syntastic检测语法
 let g:ycm_error_symbol = '✗'                                   " error symbol
 let g:ycm_warning_symbol = '⚠'                                 " warning symbol
@@ -222,6 +227,16 @@ let g:ycm_enable_diagnostic_highlighting = 1                   " 诊断高亮:0�
 let g:ycm_key_invoke_completion = '<C-Tab>'                    " 跨文件补全
 let g:ycm_confirm_extra_conf = 1                               " 加载.ycm_extra_conf.py提示:0关闭,1打开
 let g:ycm_show_diagnostics_ui = 1                              " 诊断ui:0关闭,1打开
+
+" old version
+"if !empty(glob("~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"))
+"    let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
+"endif
+
+" new version
+"if !empty(glob("~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
+"    let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+"endif
 
 " Syntastic Setting -----------------------------------------------------------
 set statusline+=%#warningmsg#
@@ -250,8 +265,8 @@ let g:syntastic_cpp_include_dirs = ['/usr/include/c++/6.3.1',
 let g:syntastic_cpp_remove_include_errors = 1
 let g:syntastic_cpp_auto_refresh_includes = 1
 let g:syntastic_cpp_check_header = 1
-let g:syntastic_cpp_compiler = 'clang++'
-"let g:syntastic_cpp_compiler = 'g++'
+"let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 stdlib=libstdc++ -Wall -Wextra'
 " whether to show balloons
 let g:syntastic_enable_balloons = 1 
