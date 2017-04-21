@@ -1,2 +1,1 @@
-# Legolas
-sync my vimrc
+# Silhouette
