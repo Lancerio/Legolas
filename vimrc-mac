@@ -1,56 +1,44 @@
-" For vundle
+" kill vi compatibility
 set nocompatible
 " 关闭文件类型检测功能
 filetype off
-" 允许vim加载文件类型插件
-filetype plugin on 
-" 允许vim为不同类型的文件定义不同的缩进格式
-filetype indent on 
+" 允许vim加载文件类型插件以及为不同类型的文件定义不同的缩进格式
+filetype plugin indent on
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-Bundle 'gmarik/vundle'
-" vim-scripts repos
-Bundle 'bash-support.vim'
-Plugin 'lua-support'
-" 插件:airline-state column
+Bundle 'gmarik/vundle'                                                          
+" vim-scripts repos                                                             
+Bundle 'bash-support.vim'                                                       
+" 插件:airline-state column                                                     
 Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-" 插件:solarized配色
-Plugin 'altercation/vim-colors-solarized'
-" 插件:molokai配色
-Plugin 'tomasr/molokai'
-" 插件:字体
-Plugin 'powerline/fonts'
-" 插件:彩虹括号
-Plugin 'luochen1990/rainbow'
-" 插件:填充缩进
-Plugin 'nathanaelkane/vim-indent-guides'
-" 插件:虚线缩进
-Bundle 'Yggdroot/indentLine'
-" 插件:自动补全
+Plugin 'vim-airline/vim-airline-themes'                                         
+" 插件:solarized配色                                                            
+Plugin 'altercation/vim-colors-solarized'                                       
+" 插件:字体                                                                     
+Plugin 'powerline/fonts'                                                        
+" 插件:彩虹括号                                                                 
+Plugin 'luochen1990/rainbow'                                                    
+" 插件:supertab                                                                 
+Plugin 'ervandew/supertab'                                                      
+" 插件:语法提示                                                                 
+Bundle 'scrooloose/syntastic'                                                   
+" 插件:winmanager                                                               
+Plugin 'winmanager'                                                             
+" 插件:tagbar                                                       
+Plugin 'Tagbar'                                                                 
+" 插件:c/h file convert                                                         
+Plugin 'a.vim'                                                                  
+" 插件:BufExplorer                                                              
+Plugin 'bufexplorer.zip'  
+" 自动补全
 Bundle 'Valloric/YouCompleteMe'
-" 插件:YouCompleteMe语义补全的服务器
-"Bundle 'Valloric/ycmd'
-" 插件:lua -- vim-misc
-Plugin 'xolox/vim-misc'
-" 插件:lua -- xolox/vim-lua-ftplugin
-Plugin 'xolox/vim-lua-ftplugin'
-" 插件:supertab
-Plugin 'ervandew/supertab'
 " 插件:ctags
 Plugin 'ctags.vim'
-" 插件:语法提示
-Bundle 'scrooloose/syntastic'
-" 插件:winmanager
-Plugin 'winmanager' 
-" 插件:tagbar depend ctag
-Plugin 'Tagbar' 
 " 插件:cscope
 Plugin 'cscope.vim' 
-" 插件:c/h file convert
-Plugin 'a.vim'  
-" 插件:BufExplorer
-Plugin 'bufexplorer.zip'
+" 插件:界定符自动补齐
+"Bundle 'delimitMat'
+
 
 " Plugin A for converting c/h file Setting ------------------------------------
 " c/h file convert touch F12
@@ -59,7 +47,7 @@ nnoremap <silent> <F12> :A<cr>
 " Tagbar Setting --------------------------------------------------------------
 nmap <Leader>tb :TagbarToggle<CR>
 " ctags程序的路径
-let g:tagbar_ctags_bin='ctags'           
+"let g:tagbar_ctags_bin='ctags'           
 " 窗口宽度的设置
 let g:tagbar_width=30                    
 " c语言程序,tagbar自动开启
@@ -82,12 +70,12 @@ nmap <C-W><C-F> :FirstExplorerWindow<cr>
 nmap <C-W><C-B> :BottomExplorerWindow<cr> 
 nmap <silent> wm :WMToggle<cr>
 " 配置进入vim时自动打开winmanager
-"let g:AutoOpenWinManager = 1
+let g:AutoOpenWinManager = 1
 
 " Vim-airline Setting ---------------------------------------------------------
 let g:airline_theme = 'luna'
 set guifont=Liberation\ Mono\ for\ Powerline\ 10
-" powerline字体补丁配置
+" powerline字体补丁配置,ariline调用powerline字体
 let g:airline_powerline_fonts = 1
 " airline top-tabline配置
 let g:airline#extensions#tabline#enabled = 1
@@ -100,47 +88,37 @@ if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
 " unicode symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = '|'
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = '|'
-let g:airline_symbols.linenr = '+'
-let g:airline_symbols.branch = '|'
-let g:airline_symbols.paste = '|'
-let g:airline_symbols.whitespace = '|'
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = '|'
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = '|'
+"let g:airline_symbols.linenr = '+'
+"let g:airline_symbols.branch = '|'
+"let g:airline_symbols.paste = '|'
+"let g:airline_symbols.whitespace = '|'
 " airline symbols
-"let g:airline_left_sep = ''
-"let g:airline_left_alt_sep = ''
-"let g:airline_right_sep = ''
-"let g:airline_right_alt_sep = ''
-"let g:airline_symbols.branch = ''
-"let g:airline_symbols.readonly = ''
-"let g:airline_symbols.linenr = ''
-
-
-" Indent Setting --------------------------------------------------------------
-" indent_guides配置(填充缩进)
-"let g:indent_guides_enable_on_vim_startup = 1
-"let g:indent_guides_auto_colors = 1
-"let g:indent_guides_guide_size = 1 
-"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
-"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
-" indentLine配置(虚线缩进)
-" map <leader>lt :IndentLinesToggle<CR>
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+let g:airline_symbols.whitespace = '|'
+let g:airline_symbols.paste = '|'
 
 " Regular Setting -------------------------------------------------------------
-" 语法高亮
-" syntax enable 
-syntax on "覆盖当前语法高亮的更改
 
 " General Setting -------------------------------------------------------------
-" 搜索和匹配
+syntax enable                   "开启set等语法
+" 搜索和匹配        
+set number                      " 显示行数
 set showmatch	        		" 高亮匹配的括号
 set matchtime=5 	        	" 匹配括号高亮的时间（单位:0.1senconds）
 set hlsearch		        	" 高亮查找
 set formatoptions=tcrqn     	" 自动格式化
 set autoindent 		        	" 继承缩进方式
-"set smartindent 	        	" 智能对齐
+set smartindent 	        	" 智能对齐
 set cindent                     " 使用 C/C++ 语言的自动缩进方式
 set tabstop=4                   " 设置制表符(tab键)的宽度
 set softtabstop=4               " 设置软制表符的宽度    
@@ -157,15 +135,16 @@ set clipboard+=unnamed 		    " 共享剪切板
 
 " Theme Setting ---------------------------------------------------------------
 " 系统配色
+syntax enable
+set background=dark
 colorscheme solarized 
 let g:colors_name = 'solarized'
 let g:solarized_termcolors = 256
-let g:solarized_termtrans = 1
+let g:solarized_termtrans = 16
 let g:solarized_contrast = 'normal'
 let g:solarized_visibility = 'normal'
-
-"colorscheme molokai 
-"let g:molokai_original=1
+let g:solarized_underline = 1 
+let g:solarized_italic = 1
 
 " Cursorline Setting ----------------------------------------------------------
 " cursorline配色
@@ -204,7 +183,6 @@ inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 " 回车即选中当前项
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"	
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 "let g:ycm_key_list_select_completion=['<c-n>']
 let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion=['<c-p>']
@@ -228,15 +206,10 @@ let g:ycm_key_invoke_completion = '<C-Tab>'                    " 跨文件补全
 let g:ycm_confirm_extra_conf = 1                               " 加载.ycm_extra_conf.py提示:0关闭,1打开
 let g:ycm_show_diagnostics_ui = 1                              " 诊断ui:0关闭,1打开
 
-" old version
-"if !empty(glob("~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"))
-"    let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
-"endif
-
-" new version
-"if !empty(glob("~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
-"    let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
-"endif
+" lib include path in conf.py
+if !empty(glob("~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
+    let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+endif
 
 " Syntastic Setting -----------------------------------------------------------
 set statusline+=%#warningmsg#
@@ -255,18 +228,10 @@ let g:syntastic_error_symbol = '✗'
 " set warning signs
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_enable_highlighting = 0
-
-" Attention below config sequence, because we can find stdlib.h in /usr/include , but
-" that stdlib.h is not expected by gcc-6, and an fatal error comes.
-" So, we need set the cpp's 'include path' in front of the general 'include path'
-let g:syntastic_cpp_include_dirs = ['/usr/include/c++/6.3.1',
-			\'/usr/include/',
-			\'/usr/local/include']
 let g:syntastic_cpp_remove_include_errors = 1
 let g:syntastic_cpp_auto_refresh_includes = 1
 let g:syntastic_cpp_check_header = 1
-"let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 stdlib=libstdc++ -Wall -Wextra'
 " whether to show balloons
 let g:syntastic_enable_balloons = 1 
@@ -297,3 +262,9 @@ let g:rainbow_conf = {
 \   }
 \}
 
+" Uncomment the following to have Vim jump to the last position when reopening
+" a file ----------------------------------------------------------------------
+autocmd BufReadPost *
+	\ if line("'\"") > 1 && line("'\"") <= line("$") |
+	\ exe "normal! g'\"" |
+	\ endif
