@@ -61,14 +61,31 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 " Netrw Setting --------------------------------------------------------------- 
 " netrw is default plugin in vim7.0
 let g:netrw_winsize = 30
+nmap <silent> <leader>fe :Sexplore!<cr> 
 
-" Tagbar work in with Winmanager Setting -------------------------------------
+" BufExplorer Setting ---------------------------------------------------------
+let g:bufExplorerDefaultHelp=1                   " 0: Do not show default help.
+let g:bufExplorerShowRelativePath=1              " Show relative paths.
+let g:bufExplorerSortBy='mru'                    " Sort by most recently used.
+let g:bufExplorerSplitRight=0                    " Split left.
+let g:bufExplorerSplitVertical=1                 " Split vertically.
+let g:bufExplorerSplitVertSize = 30              " Split width
+let g:bufExplorerMaxHeight=30
+let g:bufExplorerMinHeight=10
+let g:bufExplorerUseCurrentWindow=1              " Open in new window.
+autocmd BufWinEnter \[Buf\ List\] setl nonumber
+
+" Tagbar Netrw BufExplorer work in with Winmanager Setting --------------------
+" window layout
+" BufExplorer and FileExplorer will share a window, convert by ctrl+n with each
+" other
 let g:winManagerWindowLayout = "BufExplorer,FileExplorer|Tagbar"
 let g:winManagerWidth = 30
+" 0:on the right side of main edit area, 1:in contrast
 let g:defaultExplorer = 0 
 nmap <C-W><C-F> :FirstExplorerWindow<cr> 
 nmap <C-W><C-B> :BottomExplorerWindow<cr> 
-nmap <silent> wm :WMToggle<cr>
+nmap <silent> <leader>wm :WMToggle<cr>
 " 配置进入vim时自动打开winmanager
 let g:AutoOpenWinManager = 1
 
