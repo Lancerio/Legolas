@@ -37,8 +37,12 @@ Plugin 'ctags.vim'
 " 插件:cscope
 Plugin 'cscope.vim' 
 " 插件:界定符自动补齐
-"Bundle 'delimitMat'
-
+Bundle 'Raimondi/delimitMate'
+" 插件:成对符号编辑,快速给词加环绕符号,例如单引号/双引号/括号/成对标签等
+Bundle "tpope/vim-surround"
+" 重复一个操作行为
+" 支持surround.vim, 如通过.号对重复一次某surround操作
+Bundle 'tpope/vim-repeat'
 
 " Plugin A for converting c/h file Setting ------------------------------------
 " c/h file convert touch F12
@@ -55,6 +59,9 @@ autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 
 " SuperTab Setting ------------------------------------------------------------
 " superTab config that typing <Tab> is <C-X><C-O>
+" 0 - 不记录上次的补全方式
+" 1 - 记住上次的补全方式,直到用其他的补全命令改变它
+" 2 - 记住上次的补全方式,直到按ESC退出插入模式为止
 let g:SuperTabRetainCompletionType = 2
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
@@ -64,15 +71,15 @@ let g:netrw_winsize = 25
 nmap <silent> <leader>fe :Sexplore!<cr> 
 
 " BufExplorer Setting ---------------------------------------------------------
-let g:bufExplorerDefaultHelp=1                   " 0: Do not show default help.
-let g:bufExplorerShowRelativePath=1              " Show relative paths.
-let g:bufExplorerSortBy='mru'                    " Sort by most recently used.
-let g:bufExplorerSplitRight=0                    " Split left.
-let g:bufExplorerSplitVertical=1                 " Split vertically.
+let g:bufExplorerDefaultHelp = 1                 " 0: Do not show default help.
+let g:bufExplorerShowRelativePath = 1            " Show relative paths.
+let g:bufExplorerSortBy = 'mru'                  " Sort by most recently used.
+let g:bufExplorerSplitRight = 0                  " Split left.
+let g:bufExplorerSplitVertical = 1               " Split vertically.
 let g:bufExplorerSplitVertSize = 30              " Split width
-let g:bufExplorerMaxHeight=30
-let g:bufExplorerMinHeight=10
-let g:bufExplorerUseCurrentWindow=1              " Open in new window.
+let g:bufExplorerMaxHeight = 30
+let g:bufExplorerMinHeight = 10
+let g:bufExplorerUseCurrentWindow = 1            " Open in new window.
 autocmd BufWinEnter \[Buf\ List\] setl nonumber
 
 " Tagbar Netrw BufExplorer work in with Winmanager Setting --------------------
@@ -170,7 +177,7 @@ hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=white guibg=darkred guifg=whit
 
 " YouComplete Setting ---------------------------------------------------------
 " 配置补全菜单行为
-set completeopt=longest,menu                                                                                                                                                                                      
+set completeopt=longest,menu
 " 离开插入模式后自动关闭预览窗口
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif   
 " 打开诊断信息
@@ -200,9 +207,9 @@ inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 " 回车即选中当前项
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"	
 
-"let g:ycm_key_list_select_completion=['<c-n>']
+"let g:ycm_key_list_select_completion = ['<c-n>']
 let g:ycm_key_list_select_completion = ['<Down>']
-"let g:ycm_key_list_previous_completion=['<c-p>']
+"let g:ycm_key_list_previous_completion = ['<c-p>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 
 "let g:ycm_goto_buffer_command = 'horizontal-split'            " 分屏打开
@@ -233,7 +240,9 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" 每次自动调用 :SyntasticSetLocList, 将错误覆盖至quickfix
 let g:syntastic_always_populate_loc_list = 1
+" 自动拉起/关闭错误窗口, 不需要手动调用 :Errors
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_wq = 0
 " 打开文件时 Syntastic 插件自动高亮显示错误
