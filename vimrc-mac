@@ -57,6 +57,20 @@ let g:tagbar_width=45
 " c语言程序,tagbar自动开启
 autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 
+" Cscope Setting --------------------------------------------------------------
+" display result in quickfix window
+set cscopequickfix=s-,g-,c-,d-,t-,e-,f-,i-
+" shotcut for cscope
+" usage:e.g.first type 'ctrl+shift+-' then type s or g or c that you specified
+nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+
 " SuperTab Setting ------------------------------------------------------------
 " superTab config that typing <Tab> is <C-X><C-O>
 " 0 - 不记录上次的补全方式
