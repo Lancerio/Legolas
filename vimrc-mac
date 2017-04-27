@@ -58,8 +58,17 @@ let g:tagbar_width=45
 autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 
 " Cscope Setting --------------------------------------------------------------
-" display result in quickfix window
-set cscopequickfix=s-,g-,c-,d-,t-,e-,f-,i-
+if has("cscope")
+  " display result in quickfix window
+  set cscopequickfix=s-,g-,c-,d-,t-,e-,f-,i-
+  set nocsverb
+  " add any database in current directory
+  if filereadable("cscope.out")
+      cs add cscope.out
+  endif
+  set csverb
+endif
+
 " shotcut for cscope
 " usage:e.g.first type 'ctrl+shift+-' then type s or g or c that you specified
 nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
