@@ -57,17 +57,15 @@ let g:tagbar_width=45
 " c语言程序,tagbar自动开启
 autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 
+" Quickfix Setting ------------------------------------------------------------
+" quickfix window layout at the bottom
+" :botright copen
+" quickfix window layout at the right
+" :vertical  botright copen 
+
 " Cscope Setting --------------------------------------------------------------
-if has("cscope")
-  " display result in quickfix window
-  set cscopequickfix=s-,g-,c-,d-,t-,e-,f-,i-
-  set nocsverb
-  " add any database in current directory
-  if filereadable("cscope.out")
-      cs add cscope.out
-  endif
-  set csverb
-endif
+" display result in quickfix window
+set cscopequickfix=s-,g-,c-,d-,t-,e-,f-,i-
 
 " shotcut for cscope
 " usage:e.g.first type 'ctrl+shift+-' then type s or g or c that you specified
