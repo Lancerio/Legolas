@@ -43,6 +43,8 @@ Bundle "tpope/vim-surround"
 " 重复一个操作行为
 " 支持surround.vim, 如通过.号对重复一次某surround操作
 Bundle 'tpope/vim-repeat'
+" 文档注释
+Bundle 'DoxygenToolkit.vim'
 
 " Plugin A for converting c/h file Setting ------------------------------------
 " c/h file convert touch F12
@@ -170,7 +172,7 @@ let g:airline_symbols.paste = '|'
 
 " General Setting -------------------------------------------------------------
 syntax enable                   "开启set等语法
-" 搜索和匹配        
+
 set number                      " 显示行数
 set showmatch	        		" 高亮匹配的括号
 set matchtime=5 	        	" 匹配括号高亮的时间（单位:0.1senconds）
@@ -178,7 +180,6 @@ set hlsearch		        	" 高亮查找
 set formatoptions=tcrqn     	" 自动格式化
 set autoindent 		        	" 继承缩进方式
 set smartindent 	        	" 智能对齐
-set cindent                     " 使用 C/C++ 语言的自动缩进方式
 set tabstop=4                   " 设置制表符(tab键)的宽度
 set softtabstop=4               " 设置软制表符的宽度    
 set shiftwidth=4                " (自动) 缩进使用的4个空格
@@ -191,6 +192,10 @@ set laststatus=2	         	" 总是显示状态栏
 set textwidth=80	         	" 内容宽度
 set cc=80		             	" 显示80列的竖线
 set clipboard+=unnamed 		    " 共享剪切板
+set cindent                     " 使用 C/C++ 语言的自动缩进方式
+
+" 设置c++具体的缩进方式
+set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s)}
 
 " Theme Setting ---------------------------------------------------------------
 " 系统配色
@@ -293,7 +298,7 @@ let g:syntastic_cpp_remove_include_errors = 1
 let g:syntastic_cpp_auto_refresh_includes = 1
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = '-std=c++11 stdlib=libstdc++ -Wall -Wextra'
+let g:syntastic_cpp_compiler_options = '-std=c++14 stdlib=libstdc++ -Wall -Wextra'
 " whether to show balloons
 let g:syntastic_enable_balloons = 1 
 
@@ -329,3 +334,28 @@ autocmd BufReadPost *
 	\ if line("'\"") > 1 && line("'\"") <= line("$") |
 	\ exe "normal! g'\"" |
 	\ endif
+
+" DoxygenToolkit comment ------------------------------------------------------
+" for C++ style, change the '@' to '\'
+let g:DoxygenToolkit_commentType = "C++"
+let s:licenseTag = "Copyright(C)\<enter>"
+let s:licenseTag = s:licenseTag . "For free\<enter>"
+let s:licenseTag = s:licenseTag . "All right reserved\<enter>"
+let g:DoxygenToolkit_licenseTag = s:licenseTag
+let g:DoxygenToolkit_briefTag_pre = "\\brief "
+let g:DoxygenToolkit_templateParamTag_pre = "\\tparam "
+let g:DoxygenToolkit_paramTag_pre = "\\param "
+let g:DoxygenToolkit_returnTag = "\\return "
+let g:DoxygenToolkit_throwTag_pre = "\\throw " " @exception is also valid
+let g:DoxygenToolkit_fileTag = "\\file "
+let g:DoxygenToolkit_dateTag = "\\date "
+let g:DoxygenToolkit_authorTag = "\\author "
+let g:DoxygenToolkit_versionTag = "\\version "
+let g:DoxygenToolkit_blockTag = "\\name "
+let g:DoxygenToolkit_classTag = "\\class "
+let g:DoxygenToolkit_authorName = "Lan Jian, air.petrichor@gmail.com"
+let g:doxygen_enhanced_color = 1
+let g:DoxygenToolkit_briefTag_funcName = "yes"
+let g:DoxygenToolKit_startCommentBlock = "/// "
+let g:DoxygenToolKit_interCommentBlock = "/// "
+"let g:load_doxygen_syntax = 1
