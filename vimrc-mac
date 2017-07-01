@@ -336,26 +336,43 @@ autocmd BufReadPost *
 	\ endif
 
 " DoxygenToolkit comment ------------------------------------------------------
-" for C++ style, change the '@' to '\'
-let g:DoxygenToolkit_commentType = "C++"
-let s:licenseTag = "Copyright(C)\<enter>"
-let s:licenseTag = s:licenseTag . "For free\<enter>"
-let s:licenseTag = s:licenseTag . "All right reserved\<enter>"
+" Verify if already loaded
+let loaded_DoxygenToolkit = 1
+let g:load_doxygen_syntax = 1
+let g:doxygen_enhanced_color = 0
+let g:DoxygenToolkit_cinoptions = "c1C1"
+let g:DoxygenToolkit_commentType = "C++" " for C++ style, change the '@' to '\'
+let s:licenseTag = "Copyright (C) \<enter>\<enter>"
+let s:licenseTag = s:licenseTag . "This program is free software; you can redistribute it and/or\<enter>"
+let s:licenseTag = s:licenseTag . "modify it under the terms of the GNU General Public License\<enter>"
+let s:licenseTag = s:licenseTag . "as published by the Free Software Foundation; either version 2\<enter>" 
+let s:licenseTag = s:licenseTag . "of the License, or (at your option) any later version.\<enter>\<enter>"
+let s:licenseTag = s:licenseTag . "This program is distributed in the hope that it will be useful,\<enter>"
+let s:licenseTag = s:licenseTag . "but WITHOUT ANY WARRANTY; without even the implied warranty of\<enter>"
+let s:licenseTag = s:licenseTag . "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\<enter>"
+let s:licenseTag = s:licenseTag . "GNU General Public License for more details.\<enter>\<enter>"
+let s:licenseTag = s:licenseTag . "You should have received a copy of the GNU GeneratorExiteral Public License\<enter>"
+let s:licenseTag = s:licenseTag . "along with this program; if not, write to the Free Software\<enter>"
+let s:licenseTag = s:licenseTag . "Foundation, Inc., Free Road, Shanghai 000000, China.\<enter>"
 let g:DoxygenToolkit_licenseTag = s:licenseTag
-let g:DoxygenToolkit_briefTag_pre = "\\brief "
-let g:DoxygenToolkit_templateParamTag_pre = "\\tparam "
-let g:DoxygenToolkit_paramTag_pre = "\\param "
-let g:DoxygenToolkit_returnTag = "\\return "
-let g:DoxygenToolkit_throwTag_pre = "\\throw " " @exception is also valid
-let g:DoxygenToolkit_fileTag = "\\file "
-let g:DoxygenToolkit_dateTag = "\\date "
-let g:DoxygenToolkit_authorTag = "\\author "
-let g:DoxygenToolkit_versionTag = "\\version "
-let g:DoxygenToolkit_blockTag = "\\name "
-let g:DoxygenToolkit_classTag = "\\class "
-let g:DoxygenToolkit_authorName = "Lan Jian, air.petrichor@gmail.com"
-let g:doxygen_enhanced_color = 1
 let g:DoxygenToolkit_briefTag_funcName = "yes"
-let g:DoxygenToolKit_startCommentBlock = "/// "
-let g:DoxygenToolKit_interCommentBlock = "/// "
-"let g:load_doxygen_syntax = 1
+let g:DoxygenToolkit_briefTag_pre = "@synopsis "
+let g:DoxygenToolkit_fileTag = "@file "
+let g:DoxygenToolkit_dateTag = "@date "
+let g:DoxygenToolkit_authorTag = "@author "
+let g:DoxygenToolkit_versionTag = "@version "
+let g:DoxygenToolkit_classTag = "@class "
+let g:DoxygenToolkit_authorName = "Lan Jian, air.petrichor@gmail.com"
+let g:DoxygenToolkit_templateParamTag_pre = "@tparam "
+let g:DoxygenToolkit_paramTag_pre = "@param "
+let g:DoxygenToolkit_returnTag = "@return "
+let g:DoxygenToolkit_throwTag_pre = "@throw " " @exception is also valid
+let g:DoxygenToolkit_blockTag = ""
+let g:DoxygenToolkit_startCommentTag = "/**"
+let g:DoxygenToolkit_interCommentTag = "*"
+let g:DoxygenToolkit_endCommentTag = "*/"
+let g:DoxygenToolkit_startCommentBlock = ""
+let g:DoxygenToolkit_interCommentBlock = ""
+let g:DoxygenToolkit_endCommentBlock = ""
+let g:DoxygenToolkit_blockHeader = "------------------------------------------"
+let g:DoxygenToolkit_blockFooter = "------------------------------------------"
